@@ -5,7 +5,13 @@ export const projects = [
     id: 'tensegrity', category: 'robotics', page: 3, layout: 'featured',
     image: 'tensegrity', width: 1169, height: 1167,
     tags: ['Reinforcement learning', 'SAC', 'MuJoCo', 'OptiTrack', 'Kalman filter'],
-    gallery: [{ image: 'tensegrity-model', model: true, fr: 'Modèle du robot et de son dispositif expérimental.', en: 'Robot model and experimental setup.' }],
+    gallery: [{ image: 'TensegrityArena', format: 'png', model: true, fr: 'Arène expérimentale : robot tensegrity, structure et dispositif de capture de mouvement.', en: 'Experimental arena: tensegrity robot, frame and motion-capture setup.' }],
+    videos: [{
+      file: 'tensegrity-rollout', width: 640, height: 640,
+      source: 'https://github.com/MartinMayerEPFL/MartinMayerEPFL/blob/main/assets/tensegrity_rollout.gif',
+      fr: { title: 'Locomotion en simulation', caption: 'Le robot tensegrity en mouvement dans son environnement de simulation.' },
+      en: { title: 'Locomotion in simulation', caption: 'The tensegrity robot moving in its simulation environment.' }
+    }],
     fr: {
       category: 'ROBOTIQUE · RECHERCHE', title: 'Tensegrity', subtitle: 'Apprendre à un robot souple à se déplacer.',
       summary: 'De la simulation au robot réel : apprentissage par renforcement pour la locomotion et le suivi de vitesse.',
@@ -38,6 +44,13 @@ export const projects = [
   {
     id: 'haptic', category: 'robotics', page: 4, image: 'haptic', width: 520, height: 640,
     tags: ['PD impedance', 'UART', 'Haptics', 'Gravity compensation'],
+    url: 'https://github.com/MartinMayerEPFL/Haptic_Teleoperation', linkType: 'code',
+    videos: [{
+      file: 'haptic-teleoperation', width: 640, height: 640,
+      source: 'https://github.com/MartinMayerEPFL/MartinMayerEPFL/blob/main/assets/haptic_paddles_github.gif',
+      fr: { title: 'Le toucher à distance', caption: 'Démonstration de la téléopération bilatérale avec les deux interfaces haptiques.' },
+      en: { title: 'A shared sense of touch', caption: 'Bilateral teleoperation demonstrated with the two haptic paddles.' }
+    }],
     fr: {
       category: 'CONTRÔLE & INTERACTION', title: 'Téléopération haptique', subtitle: 'Deux interfaces, un même sens du toucher.',
       summary: 'Une liaison bilatérale pour ressentir à distance les mouvements d’un autre opérateur.',
@@ -69,6 +82,20 @@ export const projects = [
     id: 'quadruped', category: 'robotics', page: 5, image: 'quadruped', width: 1344, height: 1004,
     tags: ['Python', 'PyBullet', 'PPO / SAC', 'Optuna', 'Hopf oscillators'],
     url: 'https://github.com/MartinMayerEPFL/Legged_Robot_Project2', linkType: 'code',
+    videos: [
+      {
+        file: 'quadruped-walk', width: 960, height: 720,
+        source: 'https://github.com/MartinMayerEPFL/Legged_Robot_Project2/blob/main/x_video/WlakingGait.mov',
+        fr: { title: 'Allure de marche', caption: 'Locomotion du quadrupède en simulation PyBullet : une allure de marche.' },
+        en: { title: 'Walking gait', caption: 'Quadruped locomotion in PyBullet simulation: a walking gait.' }
+      },
+      {
+        file: 'quadruped-trot', width: 960, height: 720,
+        source: 'https://github.com/MartinMayerEPFL/Legged_Robot_Project2/blob/main/x_video/TrottingGait.mov',
+        fr: { title: 'Allure de trot', caption: 'Locomotion du quadrupède en simulation PyBullet : une allure de trot.' },
+        en: { title: 'Trotting gait', caption: 'Quadruped locomotion in PyBullet simulation: a trotting gait.' }
+      }
+    ],
     fr: {
       category: 'LOCOMOTION & SIMULATION', title: 'Locomotion quadrupède', subtitle: 'Marcher, trotter, apprendre à sauter.',
       summary: 'Des oscillateurs couplés aux politiques de deep RL pour explorer la locomotion.',
@@ -168,7 +195,7 @@ export const projects = [
   {
     id: 'squidframe', category: 'software', page: 8, layout: 'wide', image: null,
     tags: ['LLM', 'Benchmarking', 'Recursive planning', 'Product engineering'],
-    url: 'https://www.squidframe.app/', linkType: 'website',
+    url: 'https://squidframe.app/', linkType: 'website',
     fr: {
       category: 'LOGICIEL & INTELLIGENCE ARTIFICIELLE', title: 'SquidFrame', subtitle: 'Planifier. Évaluer. Améliorer.',
       summary: 'Des moteurs de planification récursive et une boucle d’évaluation pour améliorer la qualité des plans.',
@@ -218,8 +245,10 @@ export const translations = {
     educationMsc: 'Spécialisation en robotique', mscDates: '2025 — aujourd’hui', educationBsc: 'BSc Microtechnique', educationBscNote: 'Fondations en ingénierie & systèmes', educationEsa: 'Formation à la durabilité spatiale · Belgique',
     contactEyebrow: 'UNE IDÉE, UN PROJET, UNE RENCONTRE ?', contactTitle: 'Construisons<br>la suite.', contactDescription: 'Robotique, recherche ou nouvelle aventure.<br>Tout commence par une conversation.',
     downloadPdf: 'Télécharger le portfolio', contactSignoff: 'Toujours curieux. Toujours en mouvement.', backTop: 'Retour en haut',
-    close: 'Fermer', closeProject: 'Fermer le projet', discover: 'Découvrir le projet', role: 'Contribution', context: 'Contexte', technologies: 'Technologies', contributions: 'Le travail réalisé', codeLink: 'Code & vidéos sur GitHub', websiteLink: 'Découvrir SquidFrame', sourcePdf: 'Voir dans le PDF', nextProject: 'Projet suivant',
-    engineCaption: 'BOUCLE D’AMÉLIORATION DU MOTEUR', engineTest: 'Cas de test', engineData: 'Données', engineBenchmark: 'Benchmark', engineEvaluator: 'Évaluation LLM', engineLoop: 'Analyser · améliorer · retester',
+    close: 'Fermer', closeProject: 'Fermer le projet', discover: 'Découvrir le projet', role: 'Contribution', context: 'Contexte', technologies: 'Technologies', contributions: 'Le travail réalisé', codeLink: 'Voir le code sur GitHub', websiteLink: 'Visiter squidframe.app', sourcePdf: 'Voir dans le PDF', nextProject: 'Projet suivant',
+    demonstrations: 'Le projet en mouvement', videoSource: 'Source GitHub', videoFallback: 'Ouvrir la vidéo',
+    engineCaption: 'BOUCLE D’AMÉLIORATION DU MOTEUR', engineTest: 'Cas de test théoriques', engineData: 'Données utilisateur', engineBenchmark: 'Benchmark', engineEvaluator: 'LLM évaluateur', engineCore: 'Moteur SquidFrame', engineReport: 'Rapport d’évaluation', engineAgent: 'LLM agentique', engineResults: 'Résultats', engineAnalysis: 'Analyse', enginePlan: 'Plan d’amélioration', engineUpdate: 'Mise à jour du code', engineRetest: 'Retest',
+    engineDescription: 'Les cas de test théoriques et les données utilisateur alimentent le benchmark, qui exécute le moteur SquidFrame. Les résultats passent au LLM évaluateur, puis au rapport d’évaluation. Le rapport guide un LLM agentique qui met à jour le code du moteur. Le moteur modifié est de nouveau testé dans le benchmark.',
     projectsVisible: count => `${count} projet${count > 1 ? 's' : ''} affiché${count > 1 ? 's' : ''}.`,
     languageChanged: 'Le site est maintenant en français.',
     description: 'Portfolio de Martin Mayer, étudiant en MSc Robotics à l’EPFL. Robot learning, contrôle, systèmes autonomes et prototypes : six projets du code au monde physique.'
@@ -243,8 +272,10 @@ export const translations = {
     educationMsc: 'Robotics specialisation', mscDates: '2025 — present', educationBsc: 'BSc Microengineering', educationBscNote: 'Foundations in engineering & systems', educationEsa: 'Space sustainability training · Belgium',
     contactEyebrow: 'AN IDEA, A PROJECT, A CONVERSATION?', contactTitle: 'Let’s build<br>what’s next.', contactDescription: 'Robotics, research or a new adventure.<br>It all starts with a conversation.',
     downloadPdf: 'Download the portfolio', contactSignoff: 'Always curious. Always moving.', backTop: 'Back to top',
-    close: 'Close', closeProject: 'Close project', discover: 'Explore the project', role: 'Contribution', context: 'Context', technologies: 'Technologies', contributions: 'The work behind it', codeLink: 'Code & videos on GitHub', websiteLink: 'Discover SquidFrame', sourcePdf: 'View in the PDF', nextProject: 'Next project',
-    engineCaption: 'ENGINE IMPROVEMENT LOOP', engineTest: 'Test cases', engineData: 'User data', engineBenchmark: 'Benchmark', engineEvaluator: 'LLM evaluation', engineLoop: 'Analyse · improve · retest',
+    close: 'Close', closeProject: 'Close project', discover: 'Explore the project', role: 'Contribution', context: 'Context', technologies: 'Technologies', contributions: 'The work behind it', codeLink: 'View code on GitHub', websiteLink: 'Visit squidframe.app', sourcePdf: 'View in the PDF', nextProject: 'Next project',
+    demonstrations: 'The project in motion', videoSource: 'GitHub source', videoFallback: 'Open the video',
+    engineCaption: 'ENGINE IMPROVEMENT LOOP', engineTest: 'Theoretical test cases', engineData: 'User data', engineBenchmark: 'Benchmark', engineEvaluator: 'LLM evaluator', engineCore: 'SquidFrame engine', engineReport: 'Evaluation report', engineAgent: 'Agentic LLM', engineResults: 'Results', engineAnalysis: 'Analysis', enginePlan: 'Improvement plan', engineUpdate: 'Code update', engineRetest: 'Retest',
+    engineDescription: 'Theoretical test cases and user data feed a benchmark that runs the SquidFrame engine. Results go to an LLM evaluator, then into an evaluation report. The report guides a separate agentic LLM that updates the engine code. The updated engine is retested in the benchmark.',
     projectsVisible: count => `${count} project${count === 1 ? '' : 's'} shown.`,
     languageChanged: 'The website is now in English.',
     description: 'Portfolio of Martin Mayer, MSc Robotics student at EPFL. Robot learning, control, autonomous systems and prototypes: six projects from code to the physical world.'

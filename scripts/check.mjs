@@ -17,7 +17,13 @@ for (const project of projects) {
   ids.add(project.id);
   assert(html.includes(`data-project="${project.id}"`), `Aperçu sans JavaScript manquant : ${project.id}`);
   if (project.image) files.add(`assets/images/${project.image}.webp`);
-  for (const image of project.gallery || []) files.add(`assets/images/${image.image}.webp`);
+  for (const image of project.gallery || []) files.add(`assets/images/${image.image}.${image.format || 'webp'}`);
+  for (const video of project.videos || []) {
+    files.add(`assets/media/${video.file}.mp4`);
+    files.add(`assets/media/${video.file}.webp`);
+    assert.equal(new URL(video.source).hostname, 'github.com', `Source vidéo GitHub manquante : ${video.file}`);
+    for (const language of ['fr', 'en']) assert(video[language]?.title && video[language]?.caption, `Traduction vidéo manquante : ${video.file}.${language}`);
+  }
   for (const language of ['fr', 'en']) {
     const copy = project[language];
     for (const field of ['title', 'category', 'subtitle', 'summary', 'role', 'context', 'introduction', 'metric', 'metricLabel']) assert(copy[field], `${project.id}.${language}.${field} manquant`);

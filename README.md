@@ -41,7 +41,9 @@ Documentation officielle : [Utiliser un workflow personnalisé avec GitHub Pages
 - **Contenu de secours sans JavaScript et métadonnées** : `index.html`. En cas d’ajout ou de modification d’un projet, mettre également à jour son aperçu HTML. Sans JavaScript, les projets ouvrent la page correspondante du PDF.
 - **Couleurs, typographie, mise en page et animations** : `assets/styles.css`. Les couleurs principales sont définies en tête de fichier.
 - **Interactions et traduction** : `assets/js/main.js`.
-- **Images** : `assets/images/`. Elles sont extraites du PDF et optimisées en WebP. Le document d’origine reste à la racine pour le téléchargement.
+- **Schéma SquidFrame** : `assets/js/diagrams.js`. Les sept nœuds et les sept liaisons orientées suivent le diagramme de la page 8 du PDF : entrées, benchmark, évaluateur, rapport, LLM agentique, mise à jour du moteur et nouveau test. Les deux rôles LLM sont distincts.
+- **Images** : `assets/images/`. Visuels extraits du PDF et optimisés en WebP, complétés par l’arène `TensegrityArena.png` fournie séparément. Le document d’origine reste à la racine pour le téléchargement.
+- **Démonstrations** : `assets/media/`. Deux GIF publics du profil GitHub (Tensegrity et haptique) et deux vidéos du dépôt Legged_Robot_Project2 (marche et trot), convertis en MP4 H.264 avec des affiches WebP. Les vidéos conservent toute leur durée, se lancent à la demande et s’arrêtent à la fermeture de la fiche. `sources.json` conserve les liens originaux, les empreintes Git et les caractéristiques des fichiers.
 - **Polices** : Manrope et DM Sans, auto-hébergées sous SIL Open Font License. Les licences se trouvent dans `assets/fonts/`.
 
 Les liens directs vers une fiche utilisent une ancre, par exemple `/portfolio/#projet-sola`, et fonctionnent sans configuration de serveur. Adapter les métadonnées de `index.html` si l’adresse d’hébergement change.

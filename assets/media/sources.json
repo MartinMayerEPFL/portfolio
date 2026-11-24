@@ -1,0 +1,49 @@
+{
+  "description": "Original public GitHub animations, converted to H.264 MP4 for browser playback. Full duration preserved; square GIFs retain 12 fps, screen recordings use 30 fps and a maximum width of 960 px. Original files have no audio tracks.",
+  "media": [
+    {
+      "file": "tensegrity-rollout.mp4",
+      "poster": "tensegrity-rollout.webp",
+      "source": "https://github.com/MartinMayerEPFL/MartinMayerEPFL/blob/main/assets/tensegrity_rollout.gif",
+      "sourceBlobSha": "4bccc3500b326af11860d6571b056f5cce501f4a",
+      "originalBytes": 15824539,
+      "optimizedBytes": 762106,
+      "duration": 6.333333,
+      "width": 640,
+      "height": 640
+    },
+    {
+      "file": "haptic-teleoperation.mp4",
+      "poster": "haptic-teleoperation.webp",
+      "source": "https://github.com/MartinMayerEPFL/MartinMayerEPFL/blob/main/assets/haptic_paddles_github.gif",
+      "sourceBlobSha": "3c82505d9c9954198d7c4c49277cfeb2dbd6749a",
+      "originalBytes": 20404498,
+      "optimizedBytes": 1506556,
+      "duration": 10.0,
+      "width": 640,
+      "height": 640
+    },
+    {
+      "file": "quadruped-trot.mp4",
+      "poster": "quadruped-trot.webp",
+      "source": "https://github.com/MartinMayerEPFL/Legged_Robot_Project2/blob/main/x_video/TrottingGait.mov",
+      "sourceBlobSha": "6ceeb7309d97c76975b07d9beae0e1485a4cd3af",
+      "originalBytes": 27002435,
+      "optimizedBytes": 828404,
+      "duration": 15.4,
+      "width": 960,
+      "height": 720
+    },
+    {
+      "file": "quadruped-walk.mp4",
+      "poster": "quadruped-walk.webp",
+      "source": "https://github.com/MartinMayerEPFL/Legged_Robot_Project2/blob/main/x_video/WlakingGait.mov",
+      "sourceBlobSha": "47107e4ab6ea2d44c18471377f8de989ad8f7a40",
+      "originalBytes": 26917890,
+      "optimizedBytes": 788564,
+      "duration": 15.6,
+      "width": 960,
+      "height": 720
+    }
+  ]
+}

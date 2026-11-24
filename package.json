@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "node scripts/serve.mjs",
     "start": "node scripts/serve.mjs",
-    "check": "node --check assets/js/main.js && node --check assets/js/content.js && node scripts/check.mjs",
+    "check": "node --check assets/js/main.js && node --check assets/js/content.js && node --check assets/js/diagrams.js && node scripts/check.mjs",
     "build": "node scripts/build.mjs",
     "preview": "node scripts/serve.mjs dist"
   },

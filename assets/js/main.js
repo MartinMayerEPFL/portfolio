@@ -1,4 +1,5 @@
 import { projects, translations } from './content.js';
+import { engineDiagram, refreshEngineDiagrams } from './diagrams.js';
 
 const grid = document.querySelector('#project-grid');
 const dialog = document.querySelector('#project-dialog');
@@ -24,26 +25,13 @@ const escapeHtml = value => String(value).replace(/[&<>"']/g, character => ({
   '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
 }[character]));
 
-function engineDiagram() {
-  const text = translations[language];
-  return `<div class="engine-diagram" aria-hidden="true">
-    <p class="engine-caption">${text.engineCaption}</p>
-    <div class="engine-row"><span class="engine-node">${text.engineTest}</span><span class="engine-node">${text.engineData}</span></div>
-    <div class="engine-connector"></div>
-    <div class="engine-node engine-node-single">${text.engineBenchmark}</div>
-    <div class="engine-connector-bottom"></div>
-    <div class="engine-row"><span class="engine-node">${text.engineEvaluator}</span><span class="engine-node engine-node-main">SquidFrame</span></div>
-    <p class="engine-loop"><span>↻</span> ${text.engineLoop}</p>
-  </div>`;
-}
-
 function projectTags(tags, limit = tags.length) {
   return `<ul class="project-tags">${tags.slice(0, limit).map(tag => `<li>${escapeHtml(tag)}</li>`).join('')}</ul>`;
 }
 
 function projectVisual(project, isDetail = false) {
   const text = project[language];
-  if (!project.image) return engineDiagram();
+  if (!project.image) return engineDiagram(translations[language]);
   const image = `<img src="assets/images/${project.image}.webp" alt="${escapeHtml(text.imageAlt)}" width="${project.width}" height="${project.height}" ${isDetail ? '' : 'loading="lazy"'} />`;
   return `${image}${!isDetail ? `<span class="image-label ${project.id === 'sisyphus' ? 'award-label' : ''}">${escapeHtml(text.label)}</span>` : ''}`;
 }
@@ -53,16 +41,17 @@ function renderProjectCards() {
   const text = translations[language];
   grid.innerHTML = projects.map(project => {
     const copy = project[language];
-    return `<article class="project-card reveal ${project.layout ? `project-${project.layout}` : ''}" data-category="${project.category}" data-id="${project.id}">
+    return `<article class="project-card reveal ${project.layout ? `project-${project.layout}` : ''} ${project.linkType === 'website' ? 'project-with-website' : ''}" data-category="${project.category}" data-id="${project.id}">
       <a class="project-link" href="Martin_Mayer_Portfolio.pdf#page=${project.page}" data-project="${project.id}" aria-label="${escapeHtml(`${text.discover} : ${copy.title}`)}">
         <div class="project-visual visual-${project.id}">${projectVisual(project)}</div>
         <div class="project-copy"><p class="project-category">${escapeHtml(copy.category)}</p><h3>${escapeHtml(copy.title)}</h3><p class="project-subtitle">${escapeHtml(copy.subtitle)}</p>
         ${project.layout ? `<p class="project-summary">${escapeHtml(copy.summary)}</p>` : ''}
         ${projectTags(project.tags, 3)}<span class="project-read">${text.discover}<span class="plus-icon" aria-hidden="true"></span></span></div>
-      </a></article>`;
+      </a>${project.linkType === 'website' ? `<a class="project-website-link" href="${project.url}" target="_blank" rel="noopener noreferrer">${text.websiteLink}<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 3h12v12H9zM3 9v12h12" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg></a>` : ''}</article>`;
   }).join('');
   applyFilter(false);
   observeReveals();
+  refreshEngineDiagrams();
 }
 
 function applyFilter(animate = true) {
@@ -88,13 +77,35 @@ function applyFilter(animate = true) {
     button.setAttribute('aria-pressed', String(active));
   }
   if (animate) document.querySelector('#filter-status').textContent = translations[language].projectsVisible(visible);
+  refreshEngineDiagrams();
+}
+
+function pauseProjectVideos() {
+  dialog.querySelectorAll('video').forEach(video => video.pause());
+}
+
+function projectDemonstrations(project) {
+  if (!project.videos?.length) return '';
+  const text = translations[language];
+  return `<section class="detail-demonstrations" aria-labelledby="demonstrations-title"><h3 id="demonstrations-title">${text.demonstrations}</h3>
+    <div class="demo-grid ${project.videos.length === 1 ? 'demo-grid-single' : ''}">${project.videos.map(video => {
+      const copy = video[language];
+      return `<figure class="project-demo">
+        <video controls playsinline loop preload="none" width="${video.width}" height="${video.height}" poster="assets/media/${video.file}.webp" aria-label="${escapeHtml(copy.title)}" aria-describedby="caption-${video.file}">
+          <source src="assets/media/${video.file}.mp4" type="video/mp4" />
+          <a href="assets/media/${video.file}.mp4">${text.videoFallback}</a>
+        </video>
+        <figcaption id="caption-${video.file}"><div><h4>${escapeHtml(copy.title)}</h4><p>${escapeHtml(copy.caption)}</p></div><a class="media-source-link" href="${video.source}" target="_blank" rel="noopener noreferrer">${text.videoSource}</a></figcaption>
+      </figure>`;
+    }).join('')}</div></section>`;
 }
 
 function renderProjectDetail(project) {
+  pauseProjectVideos();
   const copy = project[language];
   const text = translations[language];
   const next = projects[(projects.indexOf(project) + 1) % projects.length];
-  const gallery = project.gallery?.map(image => `<figure class="${image.model ? 'gallery-model' : ''}"><img src="assets/images/${image.image}.webp" alt="${escapeHtml(image[language])}" loading="lazy" /><figcaption>${escapeHtml(image[language])}</figcaption></figure>`).join('');
+  const gallery = project.gallery?.map(image => `<figure class="${image.model ? 'gallery-model' : ''}"><img src="assets/images/${image.image}.${image.format || 'webp'}" alt="${escapeHtml(image[language])}" loading="lazy" /><figcaption>${escapeHtml(image[language])}</figcaption></figure>`).join('');
   detail.innerHTML = `
     <div class="detail-header"><p class="eyebrow">${escapeHtml(copy.category)}</p><h2 id="dialog-title">${escapeHtml(copy.title)}</h2><p class="detail-subtitle">${escapeHtml(copy.subtitle)}</p>
       <dl class="detail-meta"><div><dt>${text.role}</dt><dd>${escapeHtml(copy.role)}</dd></div><div><dt>${text.context}</dt><dd>${escapeHtml(copy.context)}</dd></div></dl>
@@ -106,7 +117,9 @@ function renderProjectDetail(project) {
       </div>
     </div>
     ${gallery ? `<div class="detail-gallery">${gallery}</div>` : ''}
+    ${projectDemonstrations(project)}
     <button class="detail-next" type="button" data-next="${next.id}"><span><small>${text.nextProject}</small><strong>${escapeHtml(next[language].title)}</strong></span><span class="plus-icon" aria-hidden="true"></span></button>`;
+  refreshEngineDiagrams();
 }
 
 function openProject(id, { updateHistory = true, replaceHistory = false } = {}) {
@@ -117,6 +130,7 @@ function openProject(id, { updateHistory = true, replaceHistory = false } = {}) 
   lastProjectId = id;
   renderProjectDetail(project);
   if (!dialog.open) dialog.showModal();
+  refreshEngineDiagrams();
   document.body.classList.add('dialog-open');
   dialog.scrollTop = 0;
   dialog.querySelector('.dialog-close').focus({ preventScroll: true });
@@ -129,6 +143,7 @@ function openProject(id, { updateHistory = true, replaceHistory = false } = {}) 
 
 function closeProject({ updateHistory = true } = {}) {
   if (!dialog.open) return;
+  pauseProjectVideos();
   dialog.close();
   document.body.classList.remove('dialog-open');
   activeProject = null;
@@ -262,7 +277,10 @@ dialog.addEventListener('click', event => {
   const bounds = dialog.getBoundingClientRect();
   if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) closeProject();
 });
-dialog.addEventListener('close', () => document.body.classList.remove('dialog-open'));
+dialog.addEventListener('close', () => {
+  pauseProjectVideos();
+  document.body.classList.remove('dialog-open');
+});
 window.addEventListener('hashchange', syncProjectHash);
 window.addEventListener('scroll', () => {
   if (scrollPending) return;
@@ -270,6 +288,7 @@ window.addEventListener('scroll', () => {
   window.requestAnimationFrame(updateScroll);
 }, { passive: true });
 window.addEventListener('resize', updateScroll, { passive: true });
+window.addEventListener('resize', refreshEngineDiagrams, { passive: true });
 reducedMotion.addEventListener('change', () => {
   document.documentElement.classList.toggle('motion-ready', !reducedMotion.matches);
   if (reducedMotion.matches) {
