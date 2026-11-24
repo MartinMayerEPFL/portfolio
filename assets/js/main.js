@@ -29,6 +29,11 @@ function projectTags(tags, limit = tags.length) {
   return `<ul class="project-tags">${tags.slice(0, limit).map(tag => `<li>${escapeHtml(tag)}</li>`).join('')}</ul>`;
 }
 
+function websiteLabel(project) {
+  const domain = new URL(project.url).hostname.replace(/^www\./, '');
+  return `${translations[language].websiteLink} ${domain}`;
+}
+
 function projectVisual(project, isDetail = false) {
   const text = project[language];
   if (!project.image) return engineDiagram(translations[language]);
@@ -47,7 +52,7 @@ function renderProjectCards() {
         <div class="project-copy"><p class="project-category">${escapeHtml(copy.category)}</p><h3>${escapeHtml(copy.title)}</h3><p class="project-subtitle">${escapeHtml(copy.subtitle)}</p>
         ${project.layout ? `<p class="project-summary">${escapeHtml(copy.summary)}</p>` : ''}
         ${projectTags(project.tags, 3)}<span class="project-read">${text.discover}<span class="plus-icon" aria-hidden="true"></span></span></div>
-      </a>${project.linkType === 'website' ? `<a class="project-website-link" href="${project.url}" target="_blank" rel="noopener noreferrer">${text.websiteLink}<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 3h12v12H9zM3 9v12h12" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg></a>` : ''}</article>`;
+      </a>${project.linkType === 'website' ? `<a class="project-website-link" href="${project.url}" target="_blank" rel="noopener noreferrer">${escapeHtml(websiteLabel(project))}<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 3h12v12H9zM3 9v12h12" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg></a>` : ''}</article>`;
   }).join('');
   applyFilter(false);
   observeReveals();
@@ -113,7 +118,7 @@ function renderProjectDetail(project) {
     <div class="detail-cover visual-${project.id}">${projectVisual(project, true)}</div>
     <div class="detail-body"><aside class="detail-sidebar"><div><h3>${text.technologies}</h3>${projectTags(project.tags)}</div><div class="detail-outcome"><strong>${escapeHtml(copy.metric)}</strong><span>${escapeHtml(copy.metricLabel)}</span></div></aside>
       <div class="detail-narrative"><p>${escapeHtml(copy.introduction)}</p><h3>${text.contributions}</h3><ul>${copy.details.map(item => `<li>${escapeHtml(item)}</li>`).join('')}</ul>
-        <div class="detail-external">${project.url ? `<a class="button button-dark" href="${project.url}" target="_blank" rel="noopener noreferrer"><span class="button-square" aria-hidden="true"></span>${project.linkType === 'code' ? text.codeLink : text.websiteLink}</a>` : ''}<a class="text-link" href="Martin_Mayer_Portfolio.pdf#page=${project.page}" target="_blank" rel="noopener noreferrer">${text.sourcePdf}</a></div>
+        <div class="detail-external">${project.url ? `<a class="button button-dark" href="${project.url}" target="_blank" rel="noopener noreferrer"><span class="button-square" aria-hidden="true"></span>${project.linkType === 'code' ? text.codeLink : escapeHtml(websiteLabel(project))}</a>` : ''}<a class="text-link" href="Martin_Mayer_Portfolio.pdf#page=${project.page}" target="_blank" rel="noopener noreferrer">${text.sourcePdf}</a></div>
       </div>
     </div>
     ${gallery ? `<div class="detail-gallery">${gallery}</div>` : ''}

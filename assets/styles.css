@@ -284,6 +284,9 @@ h2{font-size:clamp(2.8rem,4.8vw,4.6rem)}
 .project-website-link:hover{background:#282e31;color:#f78c82}
 .project-website-link svg{width:15px;height:15px;flex-shrink:0}
 .project-website-link:focus-visible{outline-offset:-5px;outline-color:var(--paper)}
+.project-card:not(.project-wide) .project-website-link{justify-content:space-between;padding-inline:0;background:none;color:var(--ink);border-top:0;border-bottom:1px solid var(--line)}
+.project-card:not(.project-wide) .project-website-link:hover{color:var(--red)}
+.project-card:not(.project-wide) .project-website-link:focus-visible{outline-color:var(--red)}
 .engine-static{display:flex;flex-direction:column;align-items:center;gap:1rem;color:var(--paper);font-size:.875rem}
 .engine-static-core{background:var(--red);padding:.7rem 1rem}
 .detail-demonstrations{padding:0 3rem 3rem}

@@ -157,6 +157,7 @@ export const projects = [
   },
   {
     id: 'sola', category: 'aerospace', page: 7, image: 'sola-aircraft', width: 640, height: 566,
+    url: 'https://projetsola.com/', linkType: 'website',
     tags: ['UAV', 'Composites', 'Systems engineering', 'CNC', 'Leadership'],
     gallery: [
       { image: 'sola-prototype', fr: 'Intégration du prototype et de sa structure.', en: 'Prototype and airframe integration.' },
@@ -245,7 +246,7 @@ export const translations = {
     educationMsc: 'Spécialisation en robotique', mscDates: '2025 — aujourd’hui', educationBsc: 'BSc Microtechnique', educationBscNote: 'Fondations en ingénierie & systèmes', educationEsa: 'Formation à la durabilité spatiale · Belgique',
     contactEmail: 'M’écrire par e-mail', contactEyebrow: 'UNE IDÉE, UN PROJET, UNE RENCONTRE ?', contactTitle: 'Construisons<br>la suite.', contactDescription: 'Robotique, recherche ou nouvelle aventure.<br>Tout commence par une conversation.',
     downloadPdf: 'Télécharger le portfolio', contactSignoff: 'Toujours curieux. Toujours en mouvement.', backTop: 'Retour en haut',
-    close: 'Fermer', closeProject: 'Fermer le projet', discover: 'Découvrir le projet', role: 'Contribution', context: 'Contexte', technologies: 'Technologies', contributions: 'Le travail réalisé', codeLink: 'Voir le code sur GitHub', websiteLink: 'Visiter squidframe.app', sourcePdf: 'Voir dans le PDF', nextProject: 'Projet suivant',
+    close: 'Fermer', closeProject: 'Fermer le projet', discover: 'Découvrir le projet', role: 'Contribution', context: 'Contexte', technologies: 'Technologies', contributions: 'Le travail réalisé', codeLink: 'Voir le code sur GitHub', websiteLink: 'Visiter', sourcePdf: 'Voir dans le PDF', nextProject: 'Projet suivant',
     demonstrations: 'Le projet en mouvement', videoSource: 'Source GitHub', videoFallback: 'Ouvrir la vidéo',
     engineCaption: 'BOUCLE D’AMÉLIORATION DU MOTEUR', engineTest: 'Cas de test théoriques', engineData: 'Données utilisateur', engineBenchmark: 'Benchmark', engineEvaluator: 'LLM évaluateur', engineCore: 'Moteur SquidFrame', engineReport: 'Rapport d’évaluation', engineAgent: 'LLM agentique', engineResults: 'Résultats', engineAnalysis: 'Analyse', enginePlan: 'Plan d’amélioration', engineUpdate: 'Mise à jour du code', engineRetest: 'Retest',
     engineDescription: 'Les cas de test théoriques et les données utilisateur alimentent le benchmark, qui exécute le moteur SquidFrame. Les résultats passent au LLM évaluateur, puis au rapport d’évaluation. Le rapport guide un LLM agentique qui met à jour le code du moteur. Le moteur modifié est de nouveau testé dans le benchmark.',
@@ -272,7 +273,7 @@ export const translations = {
     educationMsc: 'Robotics specialisation', mscDates: '2025 — present', educationBsc: 'BSc Microengineering', educationBscNote: 'Foundations in engineering & systems', educationEsa: 'Space sustainability training · Belgium',
     contactEmail: 'Send me an email', contactEyebrow: 'AN IDEA, A PROJECT, A CONVERSATION?', contactTitle: 'Let’s build<br>what’s next.', contactDescription: 'Robotics, research or a new adventure.<br>It all starts with a conversation.',
     downloadPdf: 'Download the portfolio', contactSignoff: 'Always curious. Always moving.', backTop: 'Back to top',
-    close: 'Close', closeProject: 'Close project', discover: 'Explore the project', role: 'Contribution', context: 'Context', technologies: 'Technologies', contributions: 'The work behind it', codeLink: 'View code on GitHub', websiteLink: 'Visit squidframe.app', sourcePdf: 'View in the PDF', nextProject: 'Next project',
+    close: 'Close', closeProject: 'Close project', discover: 'Explore the project', role: 'Contribution', context: 'Context', technologies: 'Technologies', contributions: 'The work behind it', codeLink: 'View code on GitHub', websiteLink: 'Visit', sourcePdf: 'View in the PDF', nextProject: 'Next project',
     demonstrations: 'The project in motion', videoSource: 'GitHub source', videoFallback: 'Open the video',
     engineCaption: 'ENGINE IMPROVEMENT LOOP', engineTest: 'Theoretical test cases', engineData: 'User data', engineBenchmark: 'Benchmark', engineEvaluator: 'LLM evaluator', engineCore: 'SquidFrame engine', engineReport: 'Evaluation report', engineAgent: 'Agentic LLM', engineResults: 'Results', engineAnalysis: 'Analysis', enginePlan: 'Improvement plan', engineUpdate: 'Code update', engineRetest: 'Retest',
     engineDescription: 'Theoretical test cases and user data feed a benchmark that runs the SquidFrame engine. Results go to an LLM evaluator, then into an evaluation report. The report guides a separate agentic LLM that updates the engine code. The updated engine is retested in the benchmark.',
