@@ -55,3 +55,5 @@ Les liens directs vers une fiche utilisent une ancre, par exemple `/portfolio/#p
 Navigation au clavier, lien d’accès au contenu, filtres annoncés aux lecteurs d’écran, menus et boîtes de dialogue avec états accessibles, fermeture par Échap, retour du focus au projet d’origine et respect de `prefers-reduced-motion`. La page reste consultable sans JavaScript et les liens de contact ouvrent directement la messagerie, GitHub ou LinkedIn.
 
 Le stockage local sert uniquement à mémoriser le choix FR/EN. Le site reste utilisable si le navigateur désactive ce stockage.
+
+Le bouton de contact reconstitue l’adresse e-mail uniquement au clic et ouvre la messagerie du visiteur. L’adresse est absente du HTML et des métadonnées structurées ; la copie publique du PDF renvoie vers la section Contact. Cette obfuscation limite la collecte par les robots simples, sans garantir une protection contre le spam. Sans JavaScript, le lien LinkedIn reste disponible. Les anciennes versions du dépôt GitHub peuvent encore contenir l’adresse précédemment publiée.

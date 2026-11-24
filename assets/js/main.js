@@ -297,6 +297,14 @@ reducedMotion.addEventListener('change', () => {
   } else observeReveals();
 });
 
+// Obfuscation reduces basic harvesting; it is not encryption or a spam guarantee.
+// Decode only after a visitor activates the contact button. Keep the link off the DOM.
+document.querySelector('[data-contact-email]').addEventListener('click', () => {
+  const draft = document.createElement('a');
+  draft.href = ['mailto', atob('bWFydGluLm1heWVyQGVwZmwuY2g=')].join(':');
+  draft.click();
+});
+
 document.querySelector('#copyright-year').textContent = new Date().getFullYear();
 setLanguage(language);
 syncProjectHash();

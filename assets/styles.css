@@ -14,7 +14,7 @@ button:disabled{cursor:default}
 img,svg{display:block;max-width:100%}
 img{height:auto}
 button:focus-visible,a:focus-visible{outline:2px solid var(--red);outline-offset:6px}
-.contact a:focus-visible,.about a:focus-visible{outline-color:#fff}
+.contact a:focus-visible,.contact button:focus-visible,.about a:focus-visible{outline-color:#fff}
 h1,h2,h3,p{margin:0}
 h1,h2,h3{font-family:var(--heading);font-weight:650;line-height:1.12;letter-spacing:-.055em}
 h2{font-size:clamp(2.8rem,4.8vw,4.6rem)}
@@ -175,7 +175,7 @@ h2{font-size:clamp(2.8rem,4.8vw,4.6rem)}
 .contact .eyebrow{margin-bottom:1.75rem;color:var(--paper)}
 .contact h2{font-size:clamp(3.8rem,7.6vw,7rem);letter-spacing:-.06em;line-height:1.05;font-weight:600}
 .contact-description{font-size:1rem;color:var(--paper);margin-top:1.75rem;line-height:1.8}
-.contact-email{display:inline-block;font-size:clamp(1.3rem,2.5vw,2.1rem);font-family:var(--heading);font-weight:500;letter-spacing:-.04em;line-height:1.5;border-bottom:1px solid rgb(255 255 255 / 45%);margin-top:1.6rem;transition:border-color .3s}
+.contact-email{display:inline-block;padding:0;text-align:left;font-size:clamp(1.3rem,2.5vw,2.1rem);font-family:var(--heading);font-weight:500;letter-spacing:-.04em;line-height:1.5;border-bottom:1px solid rgb(255 255 255 / 45%);margin-top:1.6rem;transition:border-color .3s}
 .contact-email:hover{border-color:#fff}
 .contact-links{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.8rem}
 .contact-links a{display:flex;gap:1.3rem;align-items:center;border:1px solid rgb(255 255 255 / 35%);padding:.65rem 1rem;font-size:.875rem;transition:background .25s,color .25s}
