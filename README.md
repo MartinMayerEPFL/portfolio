@@ -31,6 +31,8 @@ Le dépôt cible est [MartinMayerEPFL/portfolio](https://github.com/MartinMayerE
 
 Il n’y a aucun secret à configurer. Les prochains envois sur `main` mettront le site à jour automatiquement.
 
+La construction et la publication sont deux tâches distinctes. Chaque tentative de construction produit une archive portant un nom unique ; une relance de la publication réutilise l’archive de la construction réussie.
+
 Alternative sans GitHub Actions : le site peut aussi être publié avec **Deploy from a branch**, branche `main`, dossier `/ (root)`, puisque `index.html` est à la racine. Désactiver alors le workflow Actions pour conserver une seule méthode de publication.
 
 Documentation officielle : [Utiliser un workflow personnalisé avec GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages).
