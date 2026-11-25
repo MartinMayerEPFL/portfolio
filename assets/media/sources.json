@@ -1,5 +1,5 @@
 {
-  "description": "Original public GitHub animations, converted to H.264 MP4 for browser playback. Full duration preserved; square GIFs retain 12 fps, screen recordings use 30 fps and a maximum width of 960 px. Original files have no audio tracks.",
+  "description": "Portfolio demonstrations: public GitHub animations and supplied Crazyflie simulation recordings, optimized as H.264 MP4. Original durations and simulation playback speed are preserved.",
   "media": [
     {
       "file": "tensegrity-rollout.mp4",
@@ -44,6 +44,32 @@
       "duration": 15.6,
       "width": 960,
       "height": 720
+    },
+    {
+      "file": "aerial-robotics-course.mp4",
+      "poster": "aerial-robotics-course.webp",
+      "sourceArchive": "portfolio_crazyflie.zip",
+      "originalPath": "videos/course.mp4",
+      "sourceSha256": "489402ba641b1217d84f8e051cb9127968ca376491471fa842afe6178c00368a",
+      "originalBytes": 3792885,
+      "optimizedBytes": 1445137,
+      "duration": 20.6,
+      "width": 1600,
+      "height": 900,
+      "r_frame_rate": "30/1"
+    },
+    {
+      "file": "aerial-robotics-reconnaissance.mp4",
+      "poster": "aerial-robotics-reconnaissance.webp",
+      "sourceArchive": "portfolio_crazyflie.zip",
+      "originalPath": "videos/reconnaissance.mp4",
+      "sourceSha256": "f735bb2435024e2a861f0c7ce00e6ca1c3bbbd4307af3576764c04b02920f28d",
+      "originalBytes": 17447461,
+      "optimizedBytes": 5487752,
+      "duration": 65.6,
+      "width": 1600,
+      "height": 900,
+      "r_frame_rate": "30/1"
     }
   ]
 }

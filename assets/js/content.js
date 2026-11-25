@@ -1,4 +1,4 @@
-// Les textes et les liens proviennent du portfolio PDF fourni par Martin Mayer.
+// Sources : portfolio PDF et dossier de simulation Crazyflie fournis par Martin Mayer.
 // Ajouter un projet ici, puis ajouter son aperçu dans index.html pour le mode sans JavaScript.
 export const projects = [
   {
@@ -194,6 +194,64 @@ export const projects = [
     }
   },
   {
+    id: 'aerial-robotics', category: 'aerospace', categories: ['robotics', 'aerospace'], layout: 'featured',
+    image: 'aerial-robotics', width: 1920, height: 1080,
+    tags: ['Webots', 'Computer vision', 'Cascaded PID', 'Trajectory planning', 'Python'],
+    document: {
+      href: 'assets/documents/aerial-robotics-analysis.pdf',
+      fr: 'Analyse des trajectoires (PDF)', en: 'Trajectory analysis (PDF)'
+    },
+    videosLayout: 'stacked', mediaOrder: 'video-first',
+    videos: [
+      {
+        file: 'aerial-robotics-course', width: 1600, height: 900,
+        fr: { title: 'Deux tours de course autonome', caption: 'Transition vers le circuit mémorisé, puis deux tours chronométrés à 8,74 s et 8,82 s. Enregistrement Webots de 20,6 s, à vitesse de simulation réelle, avec retour caméra embarquée.' },
+        en: { title: 'Two autonomous racing laps', caption: 'Transition to the memorised circuit, followed by two laps timed at 8.74 s and 8.82 s. A 20.6 s Webots recording at real simulation speed, with the onboard camera view.' }
+      },
+      {
+        file: 'aerial-robotics-reconnaissance', width: 1600, height: 900,
+        fr: { title: 'Reconnaissance visuelle du circuit', caption: 'Décollage, recherche des cinq portes, estimation de leur position et mémorisation du circuit. Les 65,6 s de reconnaissance sont conservées à vitesse de simulation réelle.' },
+        en: { title: 'Visual reconnaissance of the circuit', caption: 'Take-off, detection of five gates, position estimation and circuit memorisation. The full 65.6 s reconnaissance recording is shown at real simulation speed.' }
+      }
+    ],
+    gallery: [
+      { image: 'aerial-trajectory-overview', format: 'svg', plot: true, fr: 'Reconnaissance et course : les courbes continues représentent les positions mesurées dans Webots ; les pointillés, la trajectoire planifiée ; les croix, les centres estimés par vision.', en: 'Reconnaissance and racing: solid lines show positions measured in Webots, dashed lines show the planned trajectory, and crosses mark visually estimated gate centres.' },
+      { image: 'aerial-flight-profile', format: 'svg', plot: true, fr: 'Altitude et vitesse mesurées pendant cet enregistrement de la configuration stable, avec séparation des phases de reconnaissance et de course.', en: 'Altitude and speed measured in this recording of the stable configuration, separating the reconnaissance and racing phases.' }
+    ],
+    fr: {
+      category: 'ROBOTIQUE AÉRIENNE & AUTONOMIE', title: 'Aerial Robotics', subtitle: 'Percevoir, mémoriser, voler en autonomie.',
+      summary: 'Un Crazyflie simulé reconnaît cinq portes avec sa caméra, mémorise le circuit, puis enchaîne deux tours de course autonome.',
+      imageAlt: 'Arène Webots du Crazyflie avec cinq portes et retour de la caméra embarquée', label: 'MICRO-502 · Simulation Webots',
+      role: 'Projet de cours · vol autonome', context: 'MICRO-502 · EPFL',
+      introduction: 'Ce projet de robotique aérienne associe perception, estimation, planification et commande dans Webots. Un Crazyflie repère les portes avec une caméra monoculaire, estime leur position à partir de leur hauteur connue et de l’état simulé du drone, puis mémorise le circuit pour passer de la reconnaissance à la course autonome.',
+      details: [
+        'Détection des portes magenta par segmentation HSV et filtrage morphologique, avec une machine à états pour la recherche, l’alignement, l’approche et la traversée.',
+        'Estimation monoculaire de la position des portes et agrégation de douze observations pour mémoriser leurs centres et leurs orientations.',
+        'Génération d’une trajectoire polynomiale de degré cinq, avec des points avant, au centre et après chaque porte.',
+        'Suivi par commande PID en cascade, de la position aux moteurs, et comparaison des trajectoires mesurées et planifiées.'
+      ],
+      resultNote: 'Sur cet enregistrement Webots (seed 0), le tracker valide 15 franchissements : cinq portes pendant la reconnaissance, puis deux tours de course. Les deux tours sont chronométrés à 8,74 s et 8,82 s.',
+      galleryTitle: 'Trajectoires & comportement en vol',
+      metric: '15 / 15', metricLabel: 'Franchissements validés dans cette simulation'
+    },
+    en: {
+      category: 'AERIAL ROBOTICS & AUTONOMY', title: 'Aerial Robotics', subtitle: 'Perceive, memorise, fly autonomously.',
+      summary: 'A simulated Crazyflie detects five gates with its camera, memorises the circuit and completes two autonomous racing laps.',
+      imageAlt: 'Crazyflie Webots arena with five gates and the onboard camera view', label: 'MICRO-502 · Webots simulation',
+      role: 'Course project · autonomous flight', context: 'MICRO-502 · EPFL',
+      introduction: 'This aerial robotics project combines perception, estimation, planning and control in Webots. A Crazyflie detects gates with a monocular camera, estimates their positions from their known height and the drone’s simulated state, then memorises the circuit to transition from reconnaissance to autonomous racing.',
+      details: [
+        'Detected magenta gates with HSV segmentation and morphological filtering, using a state machine for search, alignment, approach and traversal.',
+        'Estimated gate positions through monocular geometry, aggregating twelve observations to memorise their centres and orientations.',
+        'Generated a fifth-degree polynomial trajectory with waypoints before, at and after each gate.',
+        'Tracked the trajectory using cascaded PID control from position to motor commands, comparing measured and planned paths.'
+      ],
+      resultNote: 'In this Webots recording (environment seed 0), the tracker validates 15 gate crossings: five during reconnaissance and five on each of two racing laps. The two racing laps are timed at 8.74 s and 8.82 s.',
+      galleryTitle: 'Trajectories & flight behaviour',
+      metric: '15 / 15', metricLabel: 'Gate crossings validated in this simulation'
+    }
+  },
+  {
     id: 'squidframe', category: 'software', page: 8, layout: 'wide', image: null,
     tags: ['LLM', 'Benchmarking', 'Recursive planning', 'Product engineering'],
     url: 'https://squidframe.app/', linkType: 'website',
@@ -247,12 +305,12 @@ export const translations = {
     contactEmail: 'M’écrire par e-mail', contactEyebrow: 'UNE IDÉE, UN PROJET, UNE RENCONTRE ?', contactTitle: 'Construisons<br>la suite.', contactDescription: 'Robotique, recherche ou nouvelle aventure.<br>Tout commence par une conversation.',
     downloadPdf: 'Télécharger le portfolio', contactSignoff: 'Toujours curieux. Toujours en mouvement.', backTop: 'Retour en haut',
     close: 'Fermer', closeProject: 'Fermer le projet', discover: 'Découvrir le projet', role: 'Contribution', context: 'Contexte', technologies: 'Technologies', contributions: 'Le travail réalisé', codeLink: 'Voir le code sur GitHub', websiteLink: 'Visiter', sourcePdf: 'Voir dans le PDF', nextProject: 'Projet suivant',
-    demonstrations: 'Le projet en mouvement', videoSource: 'Source GitHub', videoFallback: 'Ouvrir la vidéo',
+    demonstrations: 'Le projet en mouvement', videoSource: 'Source GitHub', videoFallback: 'Ouvrir la vidéo', videoDownload: 'Télécharger la vidéo', viewFigure: 'Agrandir la figure',
     engineCaption: 'BOUCLE D’AMÉLIORATION DU MOTEUR', engineTest: 'Cas de test théoriques', engineData: 'Données utilisateur', engineBenchmark: 'Benchmark', engineEvaluator: 'LLM évaluateur', engineCore: 'Moteur SquidFrame', engineReport: 'Rapport d’évaluation', engineAgent: 'LLM agentique', engineResults: 'Résultats', engineAnalysis: 'Analyse', enginePlan: 'Plan d’amélioration', engineUpdate: 'Mise à jour du code', engineRetest: 'Retest',
     engineDescription: 'Les cas de test théoriques et les données utilisateur alimentent le benchmark, qui exécute le moteur SquidFrame. Les résultats passent au LLM évaluateur, puis au rapport d’évaluation. Le rapport guide un LLM agentique qui met à jour le code du moteur. Le moteur modifié est de nouveau testé dans le benchmark.',
     projectsVisible: count => `${count} projet${count > 1 ? 's' : ''} affiché${count > 1 ? 's' : ''}.`,
     languageChanged: 'Le site est maintenant en français.',
-    description: 'Portfolio de Martin Mayer, étudiant en MSc Robotics à l’EPFL. Robot learning, contrôle, systèmes autonomes et prototypes : six projets du code au monde physique.'
+    description: 'Portfolio de Martin Mayer, étudiant en MSc Robotics à l’EPFL. Robot learning, contrôle, systèmes autonomes et prototypes : sept projets du code au monde physique.'
   },
   en: {
     skip: 'Skip to content', navProjects: 'Projects', navAbout: 'About', navContact: 'Contact',
@@ -274,11 +332,11 @@ export const translations = {
     contactEmail: 'Send me an email', contactEyebrow: 'AN IDEA, A PROJECT, A CONVERSATION?', contactTitle: 'Let’s build<br>what’s next.', contactDescription: 'Robotics, research or a new adventure.<br>It all starts with a conversation.',
     downloadPdf: 'Download the portfolio', contactSignoff: 'Always curious. Always moving.', backTop: 'Back to top',
     close: 'Close', closeProject: 'Close project', discover: 'Explore the project', role: 'Contribution', context: 'Context', technologies: 'Technologies', contributions: 'The work behind it', codeLink: 'View code on GitHub', websiteLink: 'Visit', sourcePdf: 'View in the PDF', nextProject: 'Next project',
-    demonstrations: 'The project in motion', videoSource: 'GitHub source', videoFallback: 'Open the video',
+    demonstrations: 'The project in motion', videoSource: 'GitHub source', videoFallback: 'Open the video', videoDownload: 'Download video', viewFigure: 'Enlarge figure',
     engineCaption: 'ENGINE IMPROVEMENT LOOP', engineTest: 'Theoretical test cases', engineData: 'User data', engineBenchmark: 'Benchmark', engineEvaluator: 'LLM evaluator', engineCore: 'SquidFrame engine', engineReport: 'Evaluation report', engineAgent: 'Agentic LLM', engineResults: 'Results', engineAnalysis: 'Analysis', enginePlan: 'Improvement plan', engineUpdate: 'Code update', engineRetest: 'Retest',
     engineDescription: 'Theoretical test cases and user data feed a benchmark that runs the SquidFrame engine. Results go to an LLM evaluator, then into an evaluation report. The report guides a separate agentic LLM that updates the engine code. The updated engine is retested in the benchmark.',
     projectsVisible: count => `${count} project${count === 1 ? '' : 's'} shown.`,
     languageChanged: 'The website is now in English.',
-    description: 'Portfolio of Martin Mayer, MSc Robotics student at EPFL. Robot learning, control, autonomous systems and prototypes: six projects from code to the physical world.'
+    description: 'Portfolio of Martin Mayer, MSc Robotics student at EPFL. Robot learning, control, autonomous systems and prototypes: seven projects from code to the physical world.'
   }
 };

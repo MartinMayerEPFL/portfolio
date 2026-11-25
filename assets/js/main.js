@@ -34,6 +34,12 @@ function websiteLabel(project) {
   return `${translations[language].websiteLink} ${domain}`;
 }
 
+function sourceDocument(project) {
+  return project.document
+    ? { href: project.document.href, label: project.document[language] }
+    : { href: `Martin_Mayer_Portfolio.pdf#page=${project.page}`, label: translations[language].sourcePdf };
+}
+
 function projectVisual(project, isDetail = false) {
   const text = project[language];
   if (!project.image) return engineDiagram(translations[language]);
@@ -46,14 +52,15 @@ function renderProjectCards() {
   const text = translations[language];
   grid.innerHTML = projects.map(project => {
     const copy = project[language];
-    return `<article class="project-card reveal ${project.layout ? `project-${project.layout}` : ''} ${project.linkType === 'website' ? 'project-with-website' : ''}" data-category="${project.category}" data-id="${project.id}">
-      <a class="project-link" href="Martin_Mayer_Portfolio.pdf#page=${project.page}" data-project="${project.id}" aria-label="${escapeHtml(`${text.discover} : ${copy.title}`)}">
+    return `<article class="project-card reveal ${project.layout ? `project-${project.layout}` : ''} ${project.linkType === 'website' ? 'project-with-website' : ''}" data-category="${(project.categories || [project.category]).join(' ')}" data-id="${project.id}">
+      <a class="project-link" href="${sourceDocument(project).href}" data-project="${project.id}" aria-label="${escapeHtml(`${text.discover} : ${copy.title}`)}">
         <div class="project-visual visual-${project.id}">${projectVisual(project)}</div>
         <div class="project-copy"><p class="project-category">${escapeHtml(copy.category)}</p><h3>${escapeHtml(copy.title)}</h3><p class="project-subtitle">${escapeHtml(copy.subtitle)}</p>
         ${project.layout ? `<p class="project-summary">${escapeHtml(copy.summary)}</p>` : ''}
         ${projectTags(project.tags, 3)}<span class="project-read">${text.discover}<span class="plus-icon" aria-hidden="true"></span></span></div>
       </a>${project.linkType === 'website' ? `<a class="project-website-link" href="${project.url}" target="_blank" rel="noopener noreferrer">${escapeHtml(websiteLabel(project))}<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 3h12v12H9zM3 9v12h12" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg></a>` : ''}</article>`;
   }).join('');
+  document.querySelector('.filter-count').textContent = projects.length;
   applyFilter(false);
   observeReveals();
   refreshEngineDiagrams();
@@ -63,7 +70,7 @@ function applyFilter(animate = true) {
   let visible = 0;
   grid.dataset.filter = filter;
   for (const card of grid.querySelectorAll('.project-card')) {
-    const show = filter === 'all' || card.dataset.category === filter;
+    const show = filter === 'all' || card.dataset.category.split(' ').includes(filter);
     card.hidden = !show;
     card.classList.remove('filter-enter');
     if (show) {
@@ -93,14 +100,14 @@ function projectDemonstrations(project) {
   if (!project.videos?.length) return '';
   const text = translations[language];
   return `<section class="detail-demonstrations" aria-labelledby="demonstrations-title"><h3 id="demonstrations-title">${text.demonstrations}</h3>
-    <div class="demo-grid ${project.videos.length === 1 ? 'demo-grid-single' : ''}">${project.videos.map(video => {
+    <div class="demo-grid ${project.videos.length === 1 ? 'demo-grid-single' : ''} ${project.videosLayout === 'stacked' ? 'demo-grid-stacked' : ''}">${project.videos.map(video => {
       const copy = video[language];
       return `<figure class="project-demo">
         <video controls playsinline loop preload="none" width="${video.width}" height="${video.height}" poster="assets/media/${video.file}.webp" aria-label="${escapeHtml(copy.title)}" aria-describedby="caption-${video.file}">
           <source src="assets/media/${video.file}.mp4" type="video/mp4" />
           <a href="assets/media/${video.file}.mp4">${text.videoFallback}</a>
         </video>
-        <figcaption id="caption-${video.file}"><div><h4>${escapeHtml(copy.title)}</h4><p>${escapeHtml(copy.caption)}</p></div><a class="media-source-link" href="${video.source}" target="_blank" rel="noopener noreferrer">${text.videoSource}</a></figcaption>
+        <figcaption id="caption-${video.file}"><div><h4>${escapeHtml(copy.title)}</h4><p>${escapeHtml(copy.caption)}</p></div><a class="media-source-link" href="${video.source || `assets/media/${video.file}.mp4`}" ${video.source ? 'target="_blank" rel="noopener noreferrer"' : 'download'}>${video.source ? text.videoSource : text.videoDownload}</a></figcaption>
       </figure>`;
     }).join('')}</div></section>`;
 }
@@ -110,7 +117,14 @@ function renderProjectDetail(project) {
   const copy = project[language];
   const text = translations[language];
   const next = projects[(projects.indexOf(project) + 1) % projects.length];
-  const gallery = project.gallery?.map(image => `<figure class="${image.model ? 'gallery-model' : ''}"><img src="assets/images/${image.image}.${image.format || 'webp'}" alt="${escapeHtml(image[language])}" loading="lazy" /><figcaption>${escapeHtml(image[language])}</figcaption></figure>`).join('');
+  const documentSource = sourceDocument(project);
+  const gallery = project.gallery?.map(image => {
+    const url = `assets/images/${image.image}.${image.format || 'webp'}`;
+    const picture = `<img src="${url}" alt="${escapeHtml(image[language])}" loading="lazy" />`;
+    return `<figure class="${image.model ? 'gallery-model' : image.plot ? 'gallery-plot' : ''}">${image.plot ? `<a class="gallery-figure-link" href="${url}" target="_blank" rel="noopener noreferrer" aria-label="${escapeHtml(`${text.viewFigure} : ${image[language]}`)}">${picture}</a>` : picture}<figcaption>${escapeHtml(image[language])}${image.plot ? `<a class="text-link" href="${url}" target="_blank" rel="noopener noreferrer">${text.viewFigure}</a>` : ''}</figcaption></figure>`;
+  }).join('');
+  const galleryMarkup = gallery ? `<div class="detail-gallery">${copy.galleryTitle ? `<h3 class="gallery-heading">${escapeHtml(copy.galleryTitle)}</h3>` : ''}${gallery}</div>` : '';
+  const demonstrations = projectDemonstrations(project);
   detail.innerHTML = `
     <div class="detail-header"><p class="eyebrow">${escapeHtml(copy.category)}</p><h2 id="dialog-title">${escapeHtml(copy.title)}</h2><p class="detail-subtitle">${escapeHtml(copy.subtitle)}</p>
       <dl class="detail-meta"><div><dt>${text.role}</dt><dd>${escapeHtml(copy.role)}</dd></div><div><dt>${text.context}</dt><dd>${escapeHtml(copy.context)}</dd></div></dl>
@@ -118,11 +132,11 @@ function renderProjectDetail(project) {
     <div class="detail-cover visual-${project.id}">${projectVisual(project, true)}</div>
     <div class="detail-body"><aside class="detail-sidebar"><div><h3>${text.technologies}</h3>${projectTags(project.tags)}</div><div class="detail-outcome"><strong>${escapeHtml(copy.metric)}</strong><span>${escapeHtml(copy.metricLabel)}</span></div></aside>
       <div class="detail-narrative"><p>${escapeHtml(copy.introduction)}</p><h3>${text.contributions}</h3><ul>${copy.details.map(item => `<li>${escapeHtml(item)}</li>`).join('')}</ul>
-        <div class="detail-external">${project.url ? `<a class="button button-dark" href="${project.url}" target="_blank" rel="noopener noreferrer"><span class="button-square" aria-hidden="true"></span>${project.linkType === 'code' ? text.codeLink : escapeHtml(websiteLabel(project))}</a>` : ''}<a class="text-link" href="Martin_Mayer_Portfolio.pdf#page=${project.page}" target="_blank" rel="noopener noreferrer">${text.sourcePdf}</a></div>
+        ${copy.resultNote ? `<p class="detail-result-note">${escapeHtml(copy.resultNote)}</p>` : ''}
+        <div class="detail-external">${project.url ? `<a class="button button-dark" href="${project.url}" target="_blank" rel="noopener noreferrer"><span class="button-square" aria-hidden="true"></span>${project.linkType === 'code' ? text.codeLink : escapeHtml(websiteLabel(project))}</a>` : ''}<a class="text-link" href="${documentSource.href}" target="_blank" rel="noopener noreferrer">${escapeHtml(documentSource.label)}</a></div>
       </div>
     </div>
-    ${gallery ? `<div class="detail-gallery">${gallery}</div>` : ''}
-    ${projectDemonstrations(project)}
+    ${project.mediaOrder === 'video-first' ? demonstrations + galleryMarkup : galleryMarkup + demonstrations}
     <button class="detail-next" type="button" data-next="${next.id}"><span><small>${text.nextProject}</small><strong>${escapeHtml(next[language].title)}</strong></span><span class="plus-icon" aria-hidden="true"></span></button>`;
   refreshEngineDiagrams();
 }

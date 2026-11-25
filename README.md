@@ -1,6 +1,6 @@
 # Martin Mayer — Portfolio
 
-Portfolio français/anglais basé sur `Martin_Mayer_Portfolio.pdf`. Identité ivoire, noir et rouge, photographies extraites du PDF, six projets avec fiches détaillées, filtres, transitions, navigation mobile et préférence de langue mémorisée.
+Portfolio français/anglais basé sur `Martin_Mayer_Portfolio.pdf`. Identité ivoire, noir et rouge, photographies extraites du PDF, sept projets avec fiches détaillées, filtres, transitions, navigation mobile et préférence de langue mémorisée.
 
 Le site est entièrement statique : HTML, CSS et JavaScript natif. Les images et polices sont hébergées dans le dépôt. Aucun serveur applicatif, dépendance npm ou clé API n’est nécessaire.
 
@@ -45,8 +45,10 @@ Documentation officielle : [Utiliser un workflow personnalisé avec GitHub Pages
 - **Interactions et traduction** : `assets/js/main.js`.
 - **Schéma SquidFrame** : `assets/js/diagrams.js`. Les sept nœuds et les sept liaisons orientées suivent le diagramme de la page 8 du PDF : entrées, benchmark, évaluateur, rapport, LLM agentique, mise à jour du moteur et nouveau test. Les deux rôles LLM sont distincts.
 - **Images** : `assets/images/`. Visuels extraits du PDF et optimisés en WebP, complétés par l’arène `TensegrityArena.png` fournie séparément. Le document d’origine reste à la racine pour le téléchargement.
-- **Démonstrations** : `assets/media/`. Deux GIF publics du profil GitHub (Tensegrity et haptique) et deux vidéos du dépôt Legged_Robot_Project2 (marche et trot), convertis en MP4 H.264 avec des affiches WebP. Les vidéos conservent toute leur durée, se lancent à la demande et s’arrêtent à la fermeture de la fiche. `sources.json` conserve les liens originaux, les empreintes Git et les caractéristiques des fichiers.
+- **Démonstrations** : `assets/media/`. Deux GIF publics du profil GitHub (Tensegrity et haptique), deux vidéos du dépôt Legged_Robot_Project2 (marche et trot) et les deux enregistrements Crazyflie fournis, optimisés en MP4 H.264 avec des affiches WebP. Les vidéos conservent toute leur durée, se lancent à la demande et s’arrêtent à la fermeture de la fiche. `sources.json` conserve les liens originaux, les empreintes Git et les caractéristiques des fichiers.
 - **Polices** : Manrope et DM Sans, auto-hébergées sous SIL Open Font License. Les licences se trouvent dans `assets/fonts/`.
+
+Le projet **Aerial Robotics / Crazyflie** complète le PDF d’origine à partir du dossier `assets/portfolio_crazyflie.zip`. Sa fiche présente le cours MICRO-502, deux vidéos de simulation, les figures originales en SVG et un PDF d’analyse réunissant les quatre graphiques fournis. Les chronos de 8,74 s et 8,82 s concernent l’enregistrement Webots de seed 0 ; la description distingue la perception visuelle, l’estimation, la planification et la commande. Le dossier ne permet pas d’attribuer individuellement chaque composant du socle de cours, et la fiche reste formulée comme un projet de cours. L’archive source reste un fichier local ; le build exclut les archives ZIP et publie les médias optimisés et les figures sélectionnées.
 
 Les liens directs vers une fiche utilisent une ancre, par exemple `/portfolio/#projet-sola`, et fonctionnent sans configuration de serveur. Adapter les métadonnées de `index.html` si l’adresse d’hébergement change.
 

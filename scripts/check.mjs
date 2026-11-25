@@ -16,12 +16,16 @@ for (const project of projects) {
   assert(!ids.has(project.id), `Identifiant de projet dupliqué : ${project.id}`);
   ids.add(project.id);
   assert(html.includes(`data-project="${project.id}"`), `Aperçu sans JavaScript manquant : ${project.id}`);
+  if (project.document) {
+    files.add(project.document.href);
+    assert(project.document.fr && project.document.en, `Lien du document incomplet : ${project.id}`);
+  } else assert(Number.isInteger(project.page) && project.page > 0, `Page du portfolio manquante : ${project.id}`);
   if (project.image) files.add(`assets/images/${project.image}.webp`);
   for (const image of project.gallery || []) files.add(`assets/images/${image.image}.${image.format || 'webp'}`);
   for (const video of project.videos || []) {
     files.add(`assets/media/${video.file}.mp4`);
     files.add(`assets/media/${video.file}.webp`);
-    assert.equal(new URL(video.source).hostname, 'github.com', `Source vidéo GitHub manquante : ${video.file}`);
+    if (video.source) assert.equal(new URL(video.source).hostname, 'github.com', `Source vidéo GitHub invalide : ${video.file}`);
     for (const language of ['fr', 'en']) assert(video[language]?.title && video[language]?.caption, `Traduction vidéo manquante : ${video.file}.${language}`);
   }
   for (const language of ['fr', 'en']) {
